@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load static %}
+
+<style>
+    .navbar-custom {
+    background-color: cyan;
+    font-size: 18px;
+<!--    text-shadow: 1px 1px 1px white-->
+}
+    .body-custom {
+    background-color: #e6e6fa
+}
+.image-radius {
+    border-radius: 10px;  /* Скругление углов изображения */
+    border: 5px solid #fff; /* Цвет и ширину рамки */
+    box-shadow: 2px 1px 5px #999999; /* Цвет и размер тени */
+}
+</style>
+<head>
+    <meta charset="utf-8"> <!-- Кодировка сайта -->
+    <!-- Сайт готов работать с мобильными устройствами -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Загружаем фав-иконки -->
+    <link rel="icon" type="image/png" href="{% static "blog/logo.jpg" %}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Подключен файл со стандартными стилями бустрап -->
+<!--    {% load static %}-->
+<!--    <link href="{% static 'css/bootstrap.min.css' %}" >-->
+<!--    <script src="{% static 'bootstrap.min.js' %}"></script>-->
+<!--        <link rel="stylesheet" href="css/bootstrap.min.css">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>MY BLOG</title>
+</head>
+<body class="body-custom">
+  <nav class="navbar navbar-expand-lg navbar-custom">
+      <a class="nav-link disabled">
+        <img src="{% static 'blog/logo.jpg' %}" width="32" height="32" class="image-radius">
+      </a>
+    {% if user.is_authenticated %}
+      <a class="nav-link disabled">Вы вошли как<i> {{ request.user }}</i></a>
+      <a class="nav-link" href="{% url 'logoutuser' %}">Выход</a>
+      <a class="nav-link" href="{% url 'createblog' %}">Создать блог</a>
+      <a class="nav-link" href="{% url 'blogentry' %}">Мои записи</a>
+    {% else %}
+      <a class="nav-link active" aria-current="page" href="{% url 'loginuser' %}">Вход</a>
+      <a class="nav-link" href="{% url 'signupuser' %}">Регистрация</a>
+    {% endif %}
+  </nav>
+  <div class="container py-5">
+     <main>
+       {% block content %}
+       {% endblock %}
+     </main>
+  </div>
+</body>
+</html>

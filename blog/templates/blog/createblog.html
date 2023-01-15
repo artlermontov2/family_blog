@@ -1,0 +1,59 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<!--<div class="row justify-content-center mt-5">-->
+<!--    <div class="col-md-5">-->
+<!--        <h2>Новая запись</h2>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div class="row justify-content-center mt-5">-->
+<!--    <div class="col-md-5">-->
+<!--        {% if error %}-->
+<!--            <div class="alert alert-danger" role="alert">-->
+<!--                {{ error }}-->
+<!--            </div>-->
+<!--        {% endif %}-->
+<!--        <form method="POST">-->
+<!--            {% csrf_token %}-->
+<!--            <div class="form-group">-->
+<!--                <label for="id_title">Заголовок</label>-->
+<!--                <input type="text" name="title" class="form-control" id="id_title" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="id_description">Описание</label>-->
+<!--                <textarea name="description" class="form-control" id="id_description"></textarea>-->
+<!--            </div>-->
+<!--            <br>-->
+<!--            <button type="submit" class="btn btn-primary">Создать</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+
+{% load static %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <h2>Создать запись</h2>
+    </div>
+</div>
+<div class="mb-3">
+    <div class="col-md-5">
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <p>Заголовок</p>
+                {{ form.title }}
+                <br><p>Описание</p>
+                {{ form.media }}
+                {{ form.description|safe }}
+            </div>
+            <br>
+            <button type="submit" class="btn btn-info">Сохрнить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

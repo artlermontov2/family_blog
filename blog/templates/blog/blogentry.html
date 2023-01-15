@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <h2>Записи</h2>
+    </div>
+</div>
+{% if blogs.count == 0 %}
+<p>У вас ещё нет ни одной записи :-(</p>
+<a href="{% url 'createblog' %}">Создайте свою первую запись</a>
+{% else %}
+{% for blog in blogs %}
+<div class="row justify-content-center my-3">
+  <div class="col-md-10">
+    <a href="{% url 'blogdetail' blog.id %}">
+      <h2>{{ blog.title }}</h2>
+    </a>
+    <h5 class="text-muted">{{ blog.date_created|date:'M d Y' }} {{ blog.date_created|time:'G:i' }}</h5>
+    <h4>{{ blog.description|striptags|truncatechars:100|safe }}</h4>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

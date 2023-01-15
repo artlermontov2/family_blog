@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <h2>Редактировать запись</h2>
+    </div>
+</div>
+<div class="mb-3">
+    <div class="col-md-5">
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form method="post" >
+            {% csrf_token %}
+            <div class="form-group">
+                <p>Заголовок</p>
+                {{ form.title }}
+                <br>
+                <p>Описание</p>
+                {{ form.media }}
+                {{ form.description|safe }}
+            </div>
+            <br>
+            <button type="submit" class="btn btn-info">Сохрнить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
